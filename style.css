@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #333;
+}
+
+/* HEADER */
+header {
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+/* LAYOUT */
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* CARD */
+section {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    flex: 1;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* TITLES */
+h2 {
+    margin-top: 0;
+    color: #444;
+}
+
+/* INPUTS */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+}
+
+/* BUTTONS */
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+button {
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+/* PRIMARY */
+button[type="submit"] {
+    background: #667eea;
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background: #5a67d8;
+}
+
+/* SECONDARY */
+#clearBtn {
+    background: #e2e8f0;
+}
+
+#clearBtn:hover {
+    background: #cbd5e1;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+thead {
+    background: #667eea;
+    color: white;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: 0.2s;
+}
+
+tbody tr:hover {
+    background: #f1f5ff;
+}
+
+/* ACTION BUTTONS */
+td button {
+    padding: 6px 10px;
+    margin-right: 5px;
+    border-radius: 6px;
+}
+
+td button[data-edit] {
+    background: #38bdf8;
+    color: white;
+}
+
+td button[data-edit]:hover {
+    background: #0ea5e9;
+}
+
+td button[data-del] {
+    background: #ef4444;
+    color: white;
+}
+
+td button[data-del]:hover {
+    background: #dc2626;
+}
+
+/* SEARCH / FILTER */
+#search,
+#filter,
+#sort {
+    margin-bottom: 10px;
+}
+
+/* ERRORS */
+.error-text {
+    color: #ef4444;
+    font-size: 12px;
+    min-height: 16px;
+}
+
+.invalid {
+    border-color: #ef4444;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+}

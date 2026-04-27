@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <header>
+        <h1> Система пропусків у комп'ютерний клас</h1>
+    </header>
+
+    <main class="container">
+
+        <!-- ===== ФОРМА ===== -->
+        <section>
+            <h2 id="formTitle">Додати пропуск</h2>
+
+            <form id="passForm">
+                <input type="hidden" id="editId">
+
+                <!-- ІМ'Я -->
+                <label for="userName">Ім’я користувача</label>
+                <input id="userName" type="text" placeholder="Введіть ім’я">
+                <p class="error-text" id="userNameError"></p>
+
+                <!-- ПРИЧИНА -->
+                <label for="reason">Причина</label>
+                <select id="reason">
+                    <option value="">Оберіть причину</option>
+                    <option value="Study">Навчання</option>
+                    <option value="Exam">Іспит</option>
+                    <option value="Project">Проєкт</option>
+                </select>
+                <p class="error-text" id="reasonError"></p>
+
+                <!-- ДАТА -->
+                <label for="date">Дата</label>
+                <input id="date" type="date">
+                <p class="error-text" id="dateError"></p>
+
+                <!-- КОМЕНТАР -->
+                <label for="comment">Коментар</label>
+                <textarea id="comment" placeholder="Додатковий опис..."></textarea>
+
+                <!-- ХТО ВИДАВ -->
+                <label for="issuer">Хто видав</label>
+                <input id="issuer" type="text" placeholder="Викладач / адміністратор">
+                <p class="error-text" id="issuerError"></p>
+
+                <!-- КНОПКИ -->
+                <div class="buttons">
+                    <button type="submit"> Зберегти</button>
+                    <button type="button" id="clearBtn"> Очистити</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- ===== СПИСОК ===== -->
+        <section>
+            <h2> Список пропусків</h2>
+
+            <!-- ПОШУК -->
+            <input id="search" placeholder=" Пошук по імені...">
+
+            <!-- ФІЛЬТР -->
+            <select id="filter">
+                <option value="">Всі причини</option>
+                <option value="Study">Навчання</option>
+                <option value="Exam">Іспит</option>
+                <option value="Project">Проєкт</option>
+            </select>
+
+            <!-- СОРТУВАННЯ -->
+            <select id="sort">
+                <option value="">Без сортування</option>
+                <option value="dateAsc">Дата ↑</option>
+                <option value="dateDesc">Дата ↓</option>
+            </select>
+
+            <!-- ТАБЛИЦЯ -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ім’я</th>
+                        <th>Причина</th>
+                        <th>Дата</th>
+                        <th>Коментар</th>
+                        <th>Видав</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tableBody">
+                    <!-- JS сюди вставляє рядки -->
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+</body>
+
+</html>
