@@ -1,26 +1,55 @@
+import { Request, Response, NextFunction } from "express";
 import { PassesService } from "../services/passes.service";
 
 const service = new PassesService();
 
 export const PassesController = {
-    getAll: (req: any, res: any) => {
-        res.json(service.getAll(req.query));
+    getAll: async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            res.json(await service.getAll(req.query));
+        } catch (err) {
+            next(err);
+        }
     },
 
-    getById: (req: any, res: any) => {
-        res.json(service.getById(Number(req.params.id)));
+    getById: async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            res.json(await service.getById(Number(req.params.id)));
+        } catch (err) {
+            next(err);
+        }
     },
 
-    create: (req: any, res: any) => {
-        res.status(201).json(service.create(req.body));
+    create: async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            res.status(201).json(await service.create(req.body));
+        } catch (err) {
+            next(err);
+        }
     },
 
-    update: (req: any, res: any) => {
-        res.json(service.update(Number(req.params.id), req.body));
+    update: async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            res.json(await service.update(Number(req.params.id), req.body));
+        } catch (err) {
+            next(err);
+        }
     },
 
-    delete: (req: any, res: any) => {
-        service.delete(Number(req.params.id));
-        res.status(204).send();
+    delete: async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            await service.delete(Number(req.params.id));
+            res.status(204).send();
+        } catch (err) {
+            next(err);
+        }
+    },
+
+    getLogs: async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            res.json(await service.getLogs(Number(req.params.id)));
+        } catch (err) {
+            next(err);
+        }
     }
 };

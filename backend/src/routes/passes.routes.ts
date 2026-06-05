@@ -4,6 +4,7 @@ import { PassesController } from "../controllers/passes.controller";
 const router = express.Router();
 
 router.get("/", PassesController.getAll);
+router.get("/:id/logs", PassesController.getLogs);
 router.get("/:id", PassesController.getById);
 router.post("/", PassesController.create);
 router.put("/:id", PassesController.update);

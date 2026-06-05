@@ -3,55 +3,91 @@ import { CreatePassDto, UpdatePassDto } from "../dtos/pass.dto";
 
 const repo = new PassesRepository();
 
+function validateId(id: number) {
+    if (!Number.isInteger(id) || id <= 0) {
+        throw {
+            status: 400,
+            code: "INVALID_ID",
+            message: "Invalid id",
+            details: []
+        };
+    }
+}
+
 export class PassesService {
-
-    getAll(query: any) {
-        let data = repo.findAll();
-
-        // filter
-        if (query.reason) {
-            data = data.filter(p => p.reason === query.reason);
-        }
-
-        // search
-        if (query.search) {
-            data = data.filter(p =>
-                p.userName.toLowerCase().includes(query.search.toLowerCase())
-            );
-        }
-
-        // sort
-        if (query.sort === "dateAsc") {
-            data.sort((a, b) => a.date.localeCompare(b.date));
-        }
-
-        if (query.sort === "dateDesc") {
-            data.sort((a, b) => b.date.localeCompare(a.date));
-        }
+    async getAll(query: any) {
+        const items = await repo.findAll({
+            reason: query.reason,
+            search: query.search,
+            sort: query.sort
+        });
 
         return {
-            items: data,
-            total: data.length
+            items,
+            total: items.length
         };
     }
 
-    getById(id: number) {
-        const pass = repo.findById(id);
-        if (!pass) throw { status: 404, message: "Pass not found" };
+    async getById(id: number) {
+        validateId(id);
+
+        const pass = await repo.findById(id);
+
+        if (!pass) {
+            throw {
+                status: 404,
+                code: "PASS_NOT_FOUND",
+                message: "Pass not found",
+                details: []
+            };
+        }
+
         return pass;
     }
 
-    create(dto: CreatePassDto) {
-        return repo.create(dto);
+    async create(dto: CreatePassDto) {
+        return await repo.create(dto);
     }
 
-    update(id: number, dto: UpdatePassDto) {
-        const updated = repo.update(id, dto);
-        if (!updated) throw { status: 404, message: "Pass not found" };
+    async update(id: number, dto: UpdatePassDto) {
+        validateId(id);
+
+        const updated = await repo.update(id, dto);
+
+        if (!updated) {
+            throw {
+                status: 404,
+                code: "PASS_NOT_FOUND",
+                message: "Pass not found",
+                details: []
+            };
+        }
+
         return updated;
     }
 
-    delete(id: number) {
-        repo.delete(id);
+    async delete(id: number) {
+        validateId(id);
+
+        const deleted = await repo.delete(id);
+
+        if (!deleted) {
+            throw {
+                status: 404,
+                code: "PASS_NOT_FOUND",
+                message: "Pass not found",
+                details: []
+            };
+        }
+    }
+
+    async getLogs(id: number) {
+        validateId(id);
+
+        await this.getById(id);
+
+        return {
+            items: await repo.findLogs(id)
+        };
     }
 }
