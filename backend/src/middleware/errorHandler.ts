@@ -7,8 +7,7 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
         return res.status(409).json({
             error: {
                 code: "UNIQUE_CONSTRAINT",
-                message: "Duplicate value",
-                details: []
+                message: "Duplicate value"
             }
         });
     }
@@ -20,8 +19,7 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
         return res.status(400).json({
             error: {
                 code: "INVALID_DATA",
-                message: "Invalid data",
-                details: []
+                message: "Invalid data"
             }
         });
     }
@@ -29,8 +27,7 @@ export function errorHandler(err: any, req: any, res: any, next: any) {
     res.status(err.status || 500).json({
         error: {
             code: err.code || "INTERNAL_ERROR",
-            message: err.message || "Unexpected error",
-            details: err.details || []
+            message: err.message || "Unexpected error"
         }
     });
 }
