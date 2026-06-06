@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система пропусків</title>
+</head>
+
+<body>
+    <header>
+        <h1>Система пропусків у комп'ютерний клас</h1>
+    </header>
+
+    <section class="users-section">
+        <h2>Користувачі</h2>
+
+        <div class="users-grid">
+            <div>
+                <label for="userSelect">Обраний користувач</label>
+                <select id="userSelect"></select>
+            </div>
+
+            <div>
+                <label for="userFormName">Ім’я користувача</label>
+                <input id="userFormName" type="text" placeholder="Введіть ім’я користувача">
+            </div>
+
+            <div class="users-buttons">
+                <button id="createUserBtn" type="button">Створити</button>
+                <button id="updateUserBtn" type="button">Змінити</button>
+                <button id="deleteUserBtn" type="button">Видалити</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section>
+            <h2 id="formTitle">Додати пропуск</h2>
+
+            <div id="notice"></div>
+
+            <form id="passForm">
+                <div id="selectedUserInfo"></div>
+
+                <label for="reason">Причина</label>
+                <select id="reason">
+                    <option value="">Оберіть причину</option>
+                    <option value="study">Навчання</option>
+                    <option value="work">Робота</option>
+                    <option value="repair">Ремонт</option>
+                    <option value="other">Інше</option>
+                </select>
+                <p class="error-text" id="reasonError"></p>
+
+                <label for="date">Дата</label>
+                <input id="date" type="date">
+                <p class="error-text" id="dateError"></p>
+
+                <label for="comment">Коментар</label>
+                <textarea id="comment" placeholder="Додатковий опис..."></textarea>
+
+                <label for="issuer">Хто видав</label>
+                <input id="issuer" type="text" placeholder="Викладач / адміністратор">
+                <p class="error-text" id="issuerError"></p>
+
+                <div class="buttons">
+                    <button id="submitBtn" type="submit">Зберегти</button>
+                    <button type="button" id="clearBtn">Очистити</button>
+                </div>
+            </form>
+        </section>
+
+        <section>
+            <h2>Список пропусків</h2>
+
+            <input id="search" placeholder="Пошук по імені...">
+
+            <select id="filter">
+                <option value="">Всі причини</option>
+                <option value="study">Навчання</option>
+                <option value="work">Робота</option>
+                <option value="repair">Ремонт</option>
+                <option value="other">Інше</option>
+            </select>
+
+            <select id="sort">
+                <option value="">Без сортування</option>
+                <option value="dateAsc">Дата ↑</option>
+                <option value="dateDesc">Дата ↓</option>
+            </select>
+
+            <div id="listStatus"></div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Користувач</th>
+                        <th>Причина</th>
+                        <th>Дата</th>
+                        <th>Коментар</th>
+                        <th>Видав</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tableBody"></tbody>
+            </table>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "lab-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:be": "cd backend && npm run dev",
+    "dev:fe": "cd frontend && npx live-server . --port=5500"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

@@ -1,32 +1,44 @@
-import { CreateUserDto, UserResponseDto } from "../dtos/user.dto";
+import { CreateUserDto, UserResponseDto, UpdateUserDto } from "../dtos/user.dto";
 
-let users: UserResponseDto[] = [];
-let id = 1;
+let users: UserResponseDto[] = [
+    { id: 1, name: "Слава" }
+];
+
+let nextId = 2;
 
 export class UsersRepository {
-    findAll() {
+    findAll(): UserResponseDto[] {
         return users;
     }
 
-    findById(id: number) {
-        return users.find(u => u.id === id);
+    findById(id: number): UserResponseDto | undefined {
+        return users.find((user) => user.id === id);
     }
 
-    create(data: CreateUserDto) {
-        const user = { id: id++, ...data };
+    create(data: CreateUserDto): UserResponseDto {
+        const user: UserResponseDto = {
+            id: nextId++,
+            name: data.name
+        };
+
         users.push(user);
         return user;
     }
 
-    update(id: number, data: Partial<CreateUserDto>) {
-        const user = users.find(u => u.id === id);
+    update(id: number, data: UpdateUserDto): UserResponseDto | null {
+        const user = this.findById(id);
         if (!user) return null;
 
-        Object.assign(user, data);
+        if (data.name !== undefined) {
+            user.name = data.name;
+        }
+
         return user;
     }
 
-    delete(id: number) {
-        users = users.filter(u => u.id !== id);
+    delete(id: number): boolean {
+        const before = users.length;
+        users = users.filter((user) => user.id !== id);
+        return users.length < before;
     }
 }
